@@ -39,13 +39,11 @@ public class Board extends JPanel implements ActionListener {
     private Image apple;
     private Image head;
 
-    public Board() {
-        
+    public Board(){
         initBoard();
     }
     
-    private void initBoard() {
-
+    private void initBoard(){
         addKeyListener(new TAdapter());
         setBackground(Color.black);
         setFocusable(true);
@@ -55,8 +53,7 @@ public class Board extends JPanel implements ActionListener {
         initGame();
     }
 
-    private void loadImages() {
-
+    private void loadImages(){
         ImageIcon iid = new ImageIcon("src/resources/dot.png");
         ball = iid.getImage();
 
@@ -67,11 +64,9 @@ public class Board extends JPanel implements ActionListener {
         head = iih.getImage();
     }
 
-    private void initGame() {
-
+    private void initGame(){
         dots = 3;
-
-        for (int z = 0; z < dots; z++) {
+        for (int z = 0; z < dots; z++){
             x[z] = 50 - z * 10;
             y[z] = 50;
         }
@@ -83,16 +78,13 @@ public class Board extends JPanel implements ActionListener {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
-
         doDrawing(g);
     }
     
-    private void doDrawing(Graphics g) {
-        
-        if (inGame) {
-
+    private void doDrawing(Graphics g){
+        if (inGame){
             g.drawImage(apple, apple_x, apple_y, this);
 
             for (int z = 0; z < dots; z++) {
@@ -102,17 +94,14 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(ball, x[z], y[z], this);
                 }
             }
-
             Toolkit.getDefaultToolkit().sync();
-
-        } else {
-
+        }
+        else{
             gameOver(g);
         }        
     }
 
-    private void gameOver(Graphics g) {
-        
+    private void gameOver(Graphics g){
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
@@ -123,7 +112,6 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkApple() {
-
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
             dots++;
@@ -131,101 +119,79 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    private void move() {
-
-        for (int z = dots; z > 0; z--) {
+    private void move(){
+        for (int z = dots; z > 0; z--){
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
-
-        if (direction == Direction.left) {
+        if (direction == Direction.left){
             x[0] -= tile_size_in_px;
         }
-
-        if (direction == Direction.right) {
+        if (direction == Direction.right){
             x[0] += tile_size_in_px;
         }
-
-        if (direction == Direction.up) {
+        if (direction == Direction.up){
             y[0] -= tile_size_in_px;
         }
-
-        if (direction == Direction.down) {
+        if (direction == Direction.down){
             y[0] += tile_size_in_px;
         }
     }
 
     private void checkCollision() {
-
         for (int z = dots; z > 0; z--) {
-
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
                 inGame = false;
             }
         }
-
         if (y[0] >= height_in_px) {
             inGame = false;
         }
-
         if (y[0] < 0) {
             inGame = false;
         }
-
         if (x[0] >= width_in_px) {
             inGame = false;
         }
-
         if (x[0] < 0) {
             inGame = false;
         }
-        
         if (!inGame) {
             timer.stop();
         }
     }
 
-    private void locateApple() {
-
+    private void locateApple(){
         int r = (int) (Math.random() * RAND_POS);
         apple_x = ((r * tile_size_in_px));
-
         r = (int) (Math.random() * RAND_POS);
         apple_y = ((r * tile_size_in_px));
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e){
         if (inGame) {
 
             checkApple();
             checkCollision();
             move();
         }
-
         repaint();
     }
 
-    private class TAdapter extends KeyAdapter {
-
+    private class TAdapter extends KeyAdapter{
         @Override
-        public void keyPressed(KeyEvent e) {
-
+        public void keyPressed(KeyEvent e){
             int key = e.getKeyCode();
-
             if ((key == KeyEvent.VK_LEFT) && (direction != Direction.right)) {
                 direction = Direction.left;
             }
-
             if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.left)) {
                 direction = Direction.right;
             }
-
             if ((key == KeyEvent.VK_UP) && (direction != Direction.down)) {
                 direction = Direction.up;
             }
-
             if ((key == KeyEvent.VK_DOWN) && (direction != Direction.up)) {
                 direction = Direction.down;
             }
