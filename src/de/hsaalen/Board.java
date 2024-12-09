@@ -122,7 +122,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public AppleType randomAppleType(){
-        return Math.random()>0.8 ? AppleType.golden : AppleType.normal;
+        return Math.random()>0.5 ? AppleType.golden : AppleType.normal;
     }
 
     public int growthAmountForAppleType(){
