@@ -20,14 +20,9 @@ public class Board extends JPanel implements ActionListener {
     private final int width_in_px = 300;
     private final int height_in_px = 300;
     private final int tile_size_in_px = 10;
-    private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private final int timer_delay_in_ms = 140;
-
-    private final int x[] = new int[ALL_DOTS];
-    private final int y[] = new int[ALL_DOTS];
-
-    private int dots;
+    private Snake snake;
     private int apple_x;
     private int apple_y;
 
@@ -65,16 +60,14 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void initGame(){
-        dots = 3;
-        for (int z = 0; z < dots; z++){
-            x[z] = 50 - z * 10;
-            y[z] = 50;
-        }
-        
+        placeSnake();
         locateApple();
-
         timer = new Timer(timer_delay_in_ms, this);
         timer.start();
+    }
+
+    public void placeSnake(){
+        snake = new Snake();
     }
 
     @Override
@@ -87,11 +80,11 @@ public class Board extends JPanel implements ActionListener {
         if (inGame){
             g.drawImage(apple, apple_x, apple_y, this);
 
-            for (int z = 0; z < dots; z++) {
+            for (int z = 0; z < snake.size(); z++) {
                 if (z == 0) {
-                    g.drawImage(head, x[z], y[z], this);
+                    g.drawImage(head, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
                 } else {
-                    g.drawImage(ball, x[z], y[z], this);
+                    g.drawImage(ball, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
                 }
             }
             Toolkit.getDefaultToolkit().sync();
@@ -112,50 +105,18 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkApple() {
-        if ((x[0] == apple_x) && (y[0] == apple_y)) {
-
-            dots++;
+        if ((snake.part(0).x*tile_size_in_px == apple_x) && (snake.part(0).y*tile_size_in_px == apple_y)) {
+            // TODO: let the snake eat the apple, have to implement apple class for later
             locateApple();
         }
     }
 
     private void move(){
-        for (int z = dots; z > 0; z--){
-            x[z] = x[(z - 1)];
-            y[z] = y[(z - 1)];
-        }
-        if (direction == Direction.left){
-            x[0] -= tile_size_in_px;
-        }
-        if (direction == Direction.right){
-            x[0] += tile_size_in_px;
-        }
-        if (direction == Direction.up){
-            y[0] -= tile_size_in_px;
-        }
-        if (direction == Direction.down){
-            y[0] += tile_size_in_px;
-        }
+        snake.move(direction);
     }
 
     private void checkCollision() {
-        for (int z = dots; z > 0; z--) {
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inGame = false;
-            }
-        }
-        if (y[0] >= height_in_px) {
-            inGame = false;
-        }
-        if (y[0] < 0) {
-            inGame = false;
-        }
-        if (x[0] >= width_in_px) {
-            inGame = false;
-        }
-        if (x[0] < 0) {
-            inGame = false;
-        }
+        inGame = !snake.isSnakeColliding(width_in_px/tile_size_in_px,height_in_px/tile_size_in_px);
         if (!inGame) {
             timer.stop();
         }
