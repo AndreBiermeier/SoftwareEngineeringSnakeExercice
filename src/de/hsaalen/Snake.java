@@ -31,6 +31,14 @@ public class Snake{
         return !head.isCoordinateInArea(board_width_in_tiles-1,board_height_in_tiles-1);
     }
 
+    public void growSnake(int growthAmount, Direction direction){
+        for(int i=0;i<growthAmount;i++){
+            Coordinate head = parts.get(0);
+            parts.add(1,new Coordinate(head.x,head.y));
+            head.move(direction);
+        }
+    }
+
     public Coordinate part(int i){return parts.get(i);}
     public int size(){return parts.size();}
 }

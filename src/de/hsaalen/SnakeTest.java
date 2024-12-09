@@ -43,4 +43,15 @@ public class SnakeTest {
         snake.part(0).y=300;
         assertTrue(snake.isSnakeColliding(300,300));
     }
+
+    @Test
+    public void testGrowSnake(){
+        Snake snake = new Snake();
+        snake.growSnake(5,Direction.right);
+        for(int i=0;i<5;i++){
+            assertTrue(snake.part(i).equals(new Coordinate(10-i,5)));
+        }
+        assertFalse(snake.part(0).equals(new Coordinate(11,5)));
+        snake.isSnakeColliding(20,20);
+    }
 }
