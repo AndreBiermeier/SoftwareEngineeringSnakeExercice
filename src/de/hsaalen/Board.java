@@ -31,10 +31,7 @@ public class Board extends JPanel implements ActionListener {
     private int apple_x;
     private int apple_y;
 
-    private boolean leftDirection = false;
-    private boolean rightDirection = true;
-    private boolean upDirection = false;
-    private boolean downDirection = false;
+    private Direction direction = Direction.right;
     private boolean inGame = true;
 
     private Timer timer;
@@ -141,19 +138,19 @@ public class Board extends JPanel implements ActionListener {
             y[z] = y[(z - 1)];
         }
 
-        if (leftDirection) {
+        if (direction == Direction.left) {
             x[0] -= tile_size_in_px;
         }
 
-        if (rightDirection) {
+        if (direction == Direction.right) {
             x[0] += tile_size_in_px;
         }
 
-        if (upDirection) {
+        if (direction == Direction.up) {
             y[0] -= tile_size_in_px;
         }
 
-        if (downDirection) {
+        if (direction == Direction.down) {
             y[0] += tile_size_in_px;
         }
     }
@@ -217,28 +214,20 @@ public class Board extends JPanel implements ActionListener {
 
             int key = e.getKeyCode();
 
-            if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-                leftDirection = true;
-                upDirection = false;
-                downDirection = false;
+            if ((key == KeyEvent.VK_LEFT) && (direction != Direction.right)) {
+                direction = Direction.left;
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-                rightDirection = true;
-                upDirection = false;
-                downDirection = false;
+            if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.left)) {
+                direction = Direction.right;
             }
 
-            if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-                upDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+            if ((key == KeyEvent.VK_UP) && (direction != Direction.down)) {
+                direction = Direction.up;
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-                downDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+            if ((key == KeyEvent.VK_DOWN) && (direction != Direction.up)) {
+                direction = Direction.down;
             }
         }
     }
