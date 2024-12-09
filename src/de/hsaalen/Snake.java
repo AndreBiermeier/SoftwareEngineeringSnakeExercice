@@ -30,7 +30,7 @@ public class Snake{
         }
 
         if(head.x<0 || head.y<0) return true;
-        if(head.x>board_width_in_tiles || head.y>board_height_in_tiles) return true;
+        if(head.x>=board_width_in_tiles || head.y>=board_height_in_tiles) return true;
 
         return false;
     }

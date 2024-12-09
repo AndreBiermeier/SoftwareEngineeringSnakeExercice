@@ -40,7 +40,7 @@ public class SnakeTest {
         snake.part(0).x=-1;
         assertTrue(snake.isSnakeColliding(300,300));
         snake.part(0).x=100;
-        snake.part(0).y=340;
+        snake.part(0).y=300;
         assertTrue(snake.isSnakeColliding(300,300));
     }
 }
