@@ -20,12 +20,9 @@ public class Board extends JPanel implements ActionListener {
     private final int width_in_px = 300;
     private final int height_in_px = 300;
     private final int tile_size_in_px = 10;
-    private final int RAND_POS = 29;
     private final int timer_delay_in_ms = 140;
     private Snake snake;
     private Apple apple;
-    private int apple_x;
-    private int apple_y;
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
@@ -66,7 +63,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame(){
         placeSnake();
-        locateApple();
+        placeNewApple(AppleType.normal);
         timer = new Timer(timer_delay_in_ms, this);
         timer.start();
     }
@@ -74,8 +71,8 @@ public class Board extends JPanel implements ActionListener {
     public void placeSnake(){
         snake = new Snake();
     }
-    public void placeNewApple(){
-
+    public void placeNewApple(AppleType type){
+        apple = new Apple(type, width_in_px/tile_size_in_px, height_in_px/tile_size_in_px);
     }
 
     @Override
@@ -86,7 +83,12 @@ public class Board extends JPanel implements ActionListener {
     
     private void doDrawing(Graphics g){
         if (inGame){
-            g.drawImage(normal_apple_img, apple_x, apple_y, this);
+            Image random_apple_image;
+            switch(apple.type){
+                case golden -> random_apple_image = golden_apple_img;
+                default -> random_apple_image = normal_apple_img;
+            }
+            g.drawImage(random_apple_image, apple.coordinate.x*tile_size_in_px, apple.coordinate.y*tile_size_in_px, this);
 
             for (int z = 0; z < snake.size(); z++) {
                 if (z == 0) {
@@ -113,9 +115,21 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkApple() {
-        if ((snake.part(0).x*tile_size_in_px == apple_x) && (snake.part(0).y*tile_size_in_px == apple_y)) {
-            // TODO: let the snake eat the apple, have to implement apple class for later
-            locateApple();
+        if ((snake.part(0).x == apple.coordinate.x) && (snake.part(0).y == apple.coordinate.y)) {
+            snake.growSnake(growthAmountForAppleType(),direction);
+            placeNewApple(randomAppleType());
+        }
+    }
+
+    public AppleType randomAppleType(){
+        return Math.random()>0.8 ? AppleType.golden : AppleType.normal;
+    }
+
+    public int growthAmountForAppleType(){
+        switch(apple.type){
+            case normal -> {return 1;}
+            case golden -> {return 3;}
+            default -> {return 0;}
         }
     }
 
@@ -128,13 +142,6 @@ public class Board extends JPanel implements ActionListener {
         if (!inGame) {
             timer.stop();
         }
-    }
-
-    private void locateApple(){
-        int r = (int) (Math.random() * RAND_POS);
-        apple_x = ((r * tile_size_in_px));
-        r = (int) (Math.random() * RAND_POS);
-        apple_y = ((r * tile_size_in_px));
     }
 
     @Override
