@@ -23,6 +23,7 @@ public class Board extends JPanel implements ActionListener {
     private final int RAND_POS = 29;
     private final int timer_delay_in_ms = 140;
     private Snake snake;
+    private Apple apple;
     private int apple_x;
     private int apple_y;
 
@@ -30,9 +31,10 @@ public class Board extends JPanel implements ActionListener {
     private boolean inGame = true;
 
     private Timer timer;
-    private Image ball;
-    private Image apple;
-    private Image head;
+    private Image tail_img;
+    private Image normal_apple_img;
+    private Image golden_apple_img;
+    private Image head_img;
 
     public Board(){
         initBoard();
@@ -49,14 +51,17 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void loadImages(){
-        ImageIcon iid = new ImageIcon("src/resources/dot.png");
-        ball = iid.getImage();
+        ImageIcon image_icon_tail = new ImageIcon("src/resources/tail.png");
+        tail_img = image_icon_tail.getImage();
 
-        ImageIcon iia = new ImageIcon("src/resources/apple.png");
-        apple = iia.getImage();
+        ImageIcon image_icon_normal_apple = new ImageIcon("src/resources/normalapple.png");
+        normal_apple_img = image_icon_normal_apple.getImage();
 
-        ImageIcon iih = new ImageIcon("src/resources/head.png");
-        head = iih.getImage();
+        ImageIcon image_icon_head = new ImageIcon("src/resources/head.png");
+        head_img = image_icon_head.getImage();
+
+        ImageIcon image_icon_golden_apple = new ImageIcon("src/resources/goldenapple.png");
+        golden_apple_img = image_icon_golden_apple.getImage();
     }
 
     private void initGame(){
@@ -69,6 +74,9 @@ public class Board extends JPanel implements ActionListener {
     public void placeSnake(){
         snake = new Snake();
     }
+    public void placeNewApple(){
+
+    }
 
     @Override
     public void paintComponent(Graphics g){
@@ -78,13 +86,13 @@ public class Board extends JPanel implements ActionListener {
     
     private void doDrawing(Graphics g){
         if (inGame){
-            g.drawImage(apple, apple_x, apple_y, this);
+            g.drawImage(normal_apple_img, apple_x, apple_y, this);
 
             for (int z = 0; z < snake.size(); z++) {
                 if (z == 0) {
-                    g.drawImage(head, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
+                    g.drawImage(head_img, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
                 } else {
-                    g.drawImage(ball, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
+                    g.drawImage(tail_img, snake.part(z).x*tile_size_in_px, snake.part(z).y*tile_size_in_px, this);
                 }
             }
             Toolkit.getDefaultToolkit().sync();
