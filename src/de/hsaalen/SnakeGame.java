@@ -3,9 +3,9 @@ package de.hsaalen;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class Snake extends JFrame {
+public class SnakeGame extends JFrame {
 
-    public Snake() {
+    public SnakeGame() {
         
         initUI();
     }
@@ -26,7 +26,7 @@ public class Snake extends JFrame {
     public static void main(String[] args) {
         
         EventQueue.invokeLater(() -> {
-            JFrame ex = new Snake();
+            JFrame ex = new SnakeGame();
             ex.setVisible(true);
         });
     }
