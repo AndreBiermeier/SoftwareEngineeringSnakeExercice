@@ -38,4 +38,12 @@ public class CoordinateTest{
         assertFalse(b.equals(c));
         assertTrue(a.equals(a));
     }
+
+    @Test
+    public void testCopyCoordinates(){
+        Coordinate a = new Coordinate(1,2);
+        Coordinate b = new Coordinate(2,2);
+        a.copyCoordinates(b);
+        assertTrue(a.equals(b));
+    }
 }

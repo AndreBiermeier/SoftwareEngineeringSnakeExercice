@@ -16,4 +16,6 @@ public class Coordinate{
     public boolean equals(Coordinate that){
         return this.x==that.x && this.y==that.y;
     }
+
+    public void copyCoordinates(Coordinate that){this.x=that.x;this.y=that.y;}
 }
