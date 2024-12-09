@@ -6,8 +6,8 @@ public class Coordinate{
 
     public void move(Direction direction){
         switch(direction){
-            case up -> y+=1;
-            case down -> y-=1;
+            case up -> y-=1;
+            case down -> y+=1;
             case right -> x+=1;
             case left -> x-=1;
         }

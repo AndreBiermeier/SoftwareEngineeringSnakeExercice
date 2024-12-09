@@ -20,11 +20,11 @@ public class CoordinateTest{
                 }
                 case down -> {
                     assertEquals(5, point.x);
-                    assertEquals(4, point.y);
+                    assertEquals(6, point.y);
                 }
                 case up -> {
                     assertEquals(5, point.x);
-                    assertEquals(6, point.y);
+                    assertEquals(4, point.y);
                 }
             }
         }
