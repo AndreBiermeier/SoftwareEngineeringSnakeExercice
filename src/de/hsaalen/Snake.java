@@ -28,11 +28,7 @@ public class Snake{
         for(int i=1;i<size();i++){
             if(part(i).equals(head)) return true;
         }
-
-        if(head.x<0 || head.y<0) return true;
-        if(head.x>=board_width_in_tiles || head.y>=board_height_in_tiles) return true;
-
-        return false;
+        return !head.isCoordinateInArea(board_width_in_tiles-1,board_height_in_tiles-1);
     }
 
     public Coordinate part(int i){return parts.get(i);}

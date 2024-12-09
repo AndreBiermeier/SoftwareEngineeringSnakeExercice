@@ -30,6 +30,16 @@ public class CoordinateTest{
         }
     }
     @Test
+    public void testIsCoordinateInArea(){
+        Coordinate coordinate = new Coordinate(2,3);
+        assertTrue(coordinate.isCoordinateInArea(4,4));
+        assertFalse(coordinate.isCoordinateInArea(2,2));
+        coordinate.x = -1;
+        assertFalse(coordinate.isCoordinateInArea(4,4));
+
+
+    }
+    @Test
     public void testEquals(){
         Coordinate a = new Coordinate(1,2);
         Coordinate b = new Coordinate(1,2);

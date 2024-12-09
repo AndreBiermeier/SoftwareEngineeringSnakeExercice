@@ -18,4 +18,8 @@ public class Coordinate{
     }
 
     public void copyCoordinates(Coordinate that){this.x=that.x;this.y=that.y;}
+
+    public boolean isCoordinateInArea(int max_x, int max_y){
+        return !(x<0 || x>max_x || y<0 || y>max_y);
+    }
 }
