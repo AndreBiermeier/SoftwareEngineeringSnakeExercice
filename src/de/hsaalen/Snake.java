@@ -22,6 +22,19 @@ public class Snake{
         part(0).move(direction);
     }
 
+    // Wichtig, damit man alles mit Tiles statt mit Pixeln
+    public boolean isSnakeColliding(int board_width_in_tiles, int board_height_in_tiles){
+        Coordinate head = part(0);
+        for(int i=1;i<size();i++){
+            if(part(i).equals(head)) return true;
+        }
+
+        if(head.x<0 || head.y<0) return true;
+        if(head.x>board_width_in_tiles || head.y>board_height_in_tiles) return true;
+
+        return false;
+    }
+
     public Coordinate part(int i){return parts.get(i);}
     public int size(){return parts.size();}
 }

@@ -30,4 +30,17 @@ public class SnakeTest {
         assertTrue(snake.part(1).equals(new Coordinate(7,3)));
         assertTrue(snake.part(2).equals(new Coordinate(6,3)));
     }
+
+    @Test
+    public void testSnakeColliding(){
+        Snake snake = new Snake();
+        assertFalse(snake.isSnakeColliding(300,300));
+        snake.part(1).x=5;
+        assertTrue(snake.isSnakeColliding(300,300));
+        snake.part(0).x=-1;
+        assertTrue(snake.isSnakeColliding(300,300));
+        snake.part(0).x=100;
+        snake.part(0).y=340;
+        assertTrue(snake.isSnakeColliding(300,300));
+    }
 }
