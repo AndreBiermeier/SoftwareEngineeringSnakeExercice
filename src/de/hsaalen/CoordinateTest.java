@@ -29,4 +29,13 @@ public class CoordinateTest{
             }
         }
     }
+    @Test
+    public void testEquals(){
+        Coordinate a = new Coordinate(1,2);
+        Coordinate b = new Coordinate(1,2);
+        Coordinate c = new Coordinate(2,2);
+        assertTrue(a.equals(b));
+        assertFalse(b.equals(c));
+        assertTrue(a.equals(a));
+    }
 }

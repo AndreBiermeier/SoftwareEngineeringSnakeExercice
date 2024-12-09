@@ -12,4 +12,8 @@ public class Coordinate{
             case left -> x-=1;
         }
     }
+
+    public boolean equals(Coordinate that){
+        return this.x==that.x && this.y==that.y;
+    }
 }
