@@ -13,4 +13,21 @@ public class SnakeTest {
             assertTrue(snake.part(i).equals(new Coordinate(5-i,5)));
         }
     }
+
+    @Test
+    public void testMove(){
+        Snake snake = new Snake();
+        snake.move(Direction.down);
+        snake.move(Direction.right);
+        snake.move(Direction.right);
+        snake.move(Direction.up);
+        snake.move(Direction.left);
+        snake.move(Direction.up);
+        snake.move(Direction.up);
+        snake.move(Direction.right);
+        snake.move(Direction.down);
+        assertTrue(snake.part(0).equals(new Coordinate(7,4)));
+        assertTrue(snake.part(1).equals(new Coordinate(7,3)));
+        assertTrue(snake.part(2).equals(new Coordinate(6,3)));
+    }
 }

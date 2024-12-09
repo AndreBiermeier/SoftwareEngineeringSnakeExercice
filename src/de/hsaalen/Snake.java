@@ -15,6 +15,13 @@ public class Snake{
         }
     }
 
+    public void move(Direction direction){
+        for(int i=size()-1;i>0;i--){
+            part(i).copyCoordinates(part(i-1));
+        }
+        part(0).move(direction);
+    }
+
     public Coordinate part(int i){return parts.get(i);}
     public int size(){return parts.size();}
 }
