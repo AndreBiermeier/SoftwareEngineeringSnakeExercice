@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
@@ -26,6 +25,7 @@ public class Board extends JPanel implements ActionListener {
     private Obstacles obstacles;
     int[] highscores = new int[5];
     String[] names = new String[5];
+    public boolean is_test_falg = false;
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
@@ -170,11 +170,18 @@ public class Board extends JPanel implements ActionListener {
         inGame = !snake.isSnakeColliding(width_in_px/tile_size_in_px,height_in_px/tile_size_in_px,obstacles.obstacles);
         if (!inGame) {
             timer.stop();
-            checkPlacement("scores.txt",true);
+            checkScore();
         }
     }
 
-    public void checkPlacement(String filepath, boolean want_to_enter_name){
+    public void checkScore(){
+        String filepath;
+        if(is_test_falg){
+            filepath = "testscores.txt";
+        }
+        else{
+            filepath = "scores.txt";
+        }
         try{
             int own_score = snake.size();
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
@@ -182,11 +189,11 @@ public class Board extends JPanel implements ActionListener {
             for(int i=0;i<5;i++,line = reader.readLine()){
             if(own_score>=Integer.parseInt(line.split(" ")[1])){
                 String name;
-                if(want_to_enter_name){
-                    name = JOptionPane.showInputDialog("Enter your name");
+                if(is_test_falg){
+                    name = "unknown";
                 }
                 else{
-                    name = "unknown";
+                    name = JOptionPane.showInputDialog("Enter your name");
                 }
                 names[i] = name;
                 highscores[i] = own_score;

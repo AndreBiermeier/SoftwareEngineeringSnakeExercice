@@ -25,7 +25,8 @@ public class BoardTest {
         for(int i=0;i<100;i++){
             board.snake.parts.add(new Coordinate(i,i));
         }
-        board.checkPlacement("testscores.txt",false);
+        board.is_test_falg = true;
+        board.checkScore();
         assertEquals(board.highscores[0],103);
     }
 }
