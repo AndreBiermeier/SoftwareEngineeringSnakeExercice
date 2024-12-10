@@ -1,15 +1,15 @@
 2 Unit Test and Refactoring
 
 a) + b)
-Ich habe mehrer Refactorings aus der Vorlesung nachgemacht.
+Ich habe mehrere Refactorings aus der Vorlesung nachgemacht.
 Darunter Umbenennungen der Variablen,
 teilweise Wechsel von pixeln in tiles,
 neue Klasse Coordinate (ähnlich wie IntPair aus der Vorlesung),
 Snake als eigene Klasse
 
 c) + d) + e)
-Ich habe Apfel als neue Klasse hinzugefügt und eine Methoden aus Board in Apfel übertragen,
-zu sätzlich habe ich viele Methoden aus Board angepasst (z.B. das zufällige Platzieren des Apfels)
+Ich habe Apfel als neue Klasse hinzugefügt und einige Methoden aus Board in Apfel übertragen,
+zusätzlich habe ich viele Methoden aus Board angepasst (z.B. das zufällige Platzieren des Apfels)
 (am wichtigsten wäre es, das GUI von der Spielelogik zu trennen, aber da meine Swing-Kenntnisse nicht so gut sind,
 habe ich mich da nicht ran getraut)
 
