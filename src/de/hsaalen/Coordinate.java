@@ -22,4 +22,8 @@ public class Coordinate{
     public boolean isCoordinateInRectangle(Coordinate left_upper_corner,int width_in_tiles, int height_int_tiles){
         return !(x<left_upper_corner.x || x>(left_upper_corner.x+width_in_tiles) || y<left_upper_corner.y || y> left_upper_corner.y+height_int_tiles);
     }
+
+    public static Coordinate giveRandomCoordinate(int max_x, int max_y){
+        return new Coordinate((int) (Math.random()*max_x),(int) (Math.random()*max_y));
+    }
 }

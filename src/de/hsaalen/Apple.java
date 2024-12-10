@@ -10,6 +10,6 @@ public class Apple{
     }
 
     public void placeAppleAtRandomCoordinate(int max_x, int max_y){
-        this.coordinate = new Coordinate((int) (Math.random()*max_x),(int) (Math.random()*max_y));
+        this.coordinate = Coordinate.giveRandomCoordinate(max_x,max_y);
     }
 }

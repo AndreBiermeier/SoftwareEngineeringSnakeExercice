@@ -57,4 +57,13 @@ public class CoordinateTest{
         a.copyCoordinates(b);
         assertTrue(a.equals(b));
     }
+
+    @Test
+    public void testGiveRandomCoordinate(){
+        Coordinate testCoordinate;
+            for(int i=0;i<100;i++){
+                testCoordinate = Coordinate.giveRandomCoordinate(9,9);
+                assertTrue(testCoordinate.isCoordinateInRectangle(new Coordinate(0,0),9,9));}
+
+    }
 }
