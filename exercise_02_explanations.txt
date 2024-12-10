@@ -1,0 +1,39 @@
+2 Unit Test and Refactoring
+
+a) + b)
+Ich habe mehrer Refactorings aus der Vorlesung nachgemacht.
+Darunter Umbenennungen der Variablen,
+teilweise Wechsel von pixeln in tiles,
+neue Klasse Coordinate (ähnlich wie IntPair aus der Vorlesung),
+Snake als eigene Klasse
+
+c) + d) + e)
+Ich habe Apfel als neue Klasse hinzugefügt und eine Methoden aus Board in Apfel übertragen,
+zu sätzlich habe ich viele Methoden aus Board angepasst (z.B. das zufällige Platzieren des Apfels)
+(am wichtigsten wäre es, das GUI von der Spielelogik zu trennen, aber da meine Swing-Kenntnisse nicht so gut sind,
+habe ich mich da nicht ran getraut)
+
+3 Extending Functionality
+a)
+Ich habe einen Enum AppleType hinzugefügt, um zwischen verschiedenen Äpfeln zu unterscheiden.
+Dafür habe ich einige Methoden in Board angepasst.
+Die Superfrucht ist ein goldener Apfel.
+
+b)
+Ich habe eine neue Klasse Obstacles gemacht, die alle Hindernisse und Methoden, um neue Hindernisse zu erzeugen eingefügt.
+Man kann nur ein 3-Feld-großes Hindernis erzeugen.
+Dargestellt werden die Hindernisse durch Feuer-Felder.
+
+c)
+Jedes mal, wenn ein goldener Apfel eingesammelt wird, wird ein neues Hindernis platziert.
+(Außer, es wird nicht schnell genug ein valider Platz für das Hindernis gefunden, dann wird kein Hindernis platziert)
+Refactoring:
+	Es benötigt noch mehr refactoring, da die Methoden zum Erzeugen der Hindernisse nicht so gut lesbar sind.
+
+d)
+Es werden die 5 besten Ergebnisse angezeigt.
+Der Spieler muss nur seinen Namen eingeben, wenn er mindestens so gut wie der 5. Platz ist.
+Die Highscores werden in der Datei highscore.txt gespeichert.
+Refactoring:
+	Ja, ich habe die Highscore-Liste nur in den Game-Over-Screen eingefügt.
+	Besser wäre ein GUI mit JPaneln.
