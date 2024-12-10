@@ -19,7 +19,7 @@ public class Coordinate{
 
     public void copyCoordinates(Coordinate that){this.x=that.x;this.y=that.y;}
 
-    public boolean isCoordinateInArea(int max_x, int max_y){
-        return !(x<0 || x>max_x || y<0 || y>max_y);
+    public boolean isCoordinateInRectangle(Coordinate left_upper_corner,int width_in_tiles, int height_int_tiles){
+        return !(x<left_upper_corner.x || x>(left_upper_corner.x+width_in_tiles) || y<left_upper_corner.y || y> left_upper_corner.y+height_int_tiles);
     }
 }

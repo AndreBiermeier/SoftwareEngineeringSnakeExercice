@@ -28,7 +28,8 @@ public class Snake{
         for(int i=1;i<size();i++){
             if(part(i).equals(head)) return true;
         }
-        return !head.isCoordinateInArea(board_width_in_tiles-1,board_height_in_tiles-1);
+        Coordinate origin = new Coordinate(0,0);
+        return !head.isCoordinateInRectangle(origin,board_width_in_tiles-1,board_height_in_tiles-1);
     }
 
     public void growSnake(int growthAmount, Direction direction){

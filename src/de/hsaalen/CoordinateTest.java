@@ -32,10 +32,11 @@ public class CoordinateTest{
     @Test
     public void testIsCoordinateInArea(){
         Coordinate coordinate = new Coordinate(2,3);
-        assertTrue(coordinate.isCoordinateInArea(4,4));
-        assertFalse(coordinate.isCoordinateInArea(2,2));
+        Coordinate origin = new Coordinate(0,0);
+        assertTrue(coordinate.isCoordinateInRectangle(origin,4,4));
+        assertFalse(coordinate.isCoordinateInRectangle(origin,2,2));
         coordinate.x = -1;
-        assertFalse(coordinate.isCoordinateInArea(4,4));
+        assertFalse(coordinate.isCoordinateInRectangle(origin,4,4));
 
 
     }
