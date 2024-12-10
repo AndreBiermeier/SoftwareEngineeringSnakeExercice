@@ -8,7 +8,7 @@ public class Obstacles{
         this.obstacles = new ArrayList<Coordinate>();
     }
 
-    public void generateIShapedObstacle(Coordinate start,Direction direction,ArrayList<Coordinate> snake_parts, Coordinate apple_coordinate, int board_width_in_tiles, int board_height_in_tiles){
+    public void generateIShapedObstacle(Direction direction,ArrayList<Coordinate> snake_parts, Coordinate apple_coordinate, int board_width_in_tiles, int board_height_in_tiles){
         boolean valid_location_found = false;
         ArrayList<Coordinate> obstacle = new ArrayList<Coordinate>();
         
