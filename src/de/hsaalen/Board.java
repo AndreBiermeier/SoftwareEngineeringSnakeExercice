@@ -81,7 +81,7 @@ public class Board extends JPanel implements ActionListener {
         this.obstacles = new Obstacles();
     }
     public void placeNewApple(AppleType type){
-        apple = new Apple(type, width_in_px/tile_size_in_px, height_in_px/tile_size_in_px);
+        apple = new Apple(type, width_in_px/tile_size_in_px, height_in_px/tile_size_in_px, obstacles.obstacles);
     }
 
     @Override
