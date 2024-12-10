@@ -23,11 +23,16 @@ public class Snake{
     }
 
     // Wichtig, damit man alles mit Tiles statt mit Pixeln
-    public boolean isSnakeColliding(int board_width_in_tiles, int board_height_in_tiles){
+    public boolean isSnakeColliding(int board_width_in_tiles, int board_height_in_tiles, ArrayList<Coordinate> obstacles){
         Coordinate head = part(0);
         for(int i=1;i<size();i++){
             if(part(i).equals(head)) return true;
         }
+
+        for(Coordinate obstacle : obstacles){
+            if(head.equals(obstacle)) return true;
+        }
+
         Coordinate origin = new Coordinate(0,0);
         return !head.isCoordinateInRectangle(origin,board_width_in_tiles,board_height_in_tiles);
     }

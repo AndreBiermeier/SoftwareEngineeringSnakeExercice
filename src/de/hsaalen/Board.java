@@ -23,6 +23,7 @@ public class Board extends JPanel implements ActionListener {
     private final int timer_delay_in_ms = 140;
     private Snake snake;
     private Apple apple;
+    private Obstacles obstacles;
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
@@ -63,6 +64,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame(){
         placeSnake();
+        initObstacles();
         placeNewApple(AppleType.normal);
         timer = new Timer(timer_delay_in_ms, this);
         timer.start();
@@ -70,6 +72,9 @@ public class Board extends JPanel implements ActionListener {
 
     public void placeSnake(){
         snake = new Snake();
+    }
+    public void initObstacles(){
+        this.obstacles = new Obstacles();
     }
     public void placeNewApple(AppleType type){
         apple = new Apple(type, width_in_px/tile_size_in_px, height_in_px/tile_size_in_px);
@@ -138,7 +143,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkCollision() {
-        inGame = !snake.isSnakeColliding(width_in_px/tile_size_in_px,height_in_px/tile_size_in_px);
+        inGame = !snake.isSnakeColliding(width_in_px/tile_size_in_px,height_in_px/tile_size_in_px,obstacles.obstacles);
         if (!inGame) {
             timer.stop();
         }
