@@ -9,7 +9,7 @@ public class AppleTest{
         Apple apple;
         for(int i=0;i<100;i++){
             apple = new Apple(AppleType.normal,10,10);
-            assertTrue(apple.coordinate.isCoordinateInRectangle(new Coordinate(0,0),9,9));
+            assertTrue(apple.coordinate.isCoordinateInRectangle(new Coordinate(0,0),10,10));
         }
     }
 }

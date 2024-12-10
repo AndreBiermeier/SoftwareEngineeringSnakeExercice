@@ -34,7 +34,7 @@ public class CoordinateTest{
         Coordinate coordinate = new Coordinate(2,3);
         Coordinate origin = new Coordinate(0,0);
         assertTrue(coordinate.isCoordinateInRectangle(origin,4,4));
-        assertFalse(coordinate.isCoordinateInRectangle(origin,2,2));
+        assertFalse(coordinate.isCoordinateInRectangle(origin,2,3));
         coordinate.x = -1;
         assertFalse(coordinate.isCoordinateInRectangle(origin,4,4));
 
@@ -63,7 +63,8 @@ public class CoordinateTest{
         Coordinate testCoordinate;
             for(int i=0;i<100;i++){
                 testCoordinate = Coordinate.giveRandomCoordinate(9,9);
-                assertTrue(testCoordinate.isCoordinateInRectangle(new Coordinate(0,0),9,9));}
+                assertTrue(testCoordinate.isCoordinateInRectangle(new Coordinate(0,0),10,10));
+            }
 
     }
 }
