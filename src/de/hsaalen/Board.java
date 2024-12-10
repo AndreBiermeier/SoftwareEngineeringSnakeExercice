@@ -126,7 +126,15 @@ public class Board extends JPanel implements ActionListener {
 
         g.setColor(Color.white);
         g.setFont(small);
+        g.drawString(msg, (width_in_px - metr.stringWidth(msg)) / 2, height_in_px / 2 - 80);
+        msg = " Your score: " + snake.size();
+        g.drawString(msg, (width_in_px - metr.stringWidth(msg)) / 2, height_in_px / 2 - 60);
+        msg = "Highscores";
         g.drawString(msg, (width_in_px - metr.stringWidth(msg)) / 2, height_in_px / 2);
+        for(int i=0;i<5;i++){
+            msg = names[i] + " " + highscores[i];
+            g.drawString(msg, (width_in_px - metr.stringWidth(msg)) / 2, height_in_px / 2 + 20*(i+1));
+        }
     }
 
     private void checkApple() {

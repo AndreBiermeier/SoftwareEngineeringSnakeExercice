@@ -1,5 +1,5 @@
 i 103
 dont 20
-like 10
+like 12
 java 8
 swing 6
