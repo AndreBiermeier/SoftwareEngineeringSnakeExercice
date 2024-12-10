@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import java.io.*;
+import java.util.ArrayList;
+import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -21,9 +21,11 @@ public class Board extends JPanel implements ActionListener {
     private final int height_in_px = 300;
     private final int tile_size_in_px = 10;
     private final int timer_delay_in_ms = 140;
-    private Snake snake;
+    public Snake snake;
     private Apple apple;
     private Obstacles obstacles;
+    int[] highscores = new int[5];
+    String[] names = new String[5];
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
@@ -160,6 +162,43 @@ public class Board extends JPanel implements ActionListener {
         inGame = !snake.isSnakeColliding(width_in_px/tile_size_in_px,height_in_px/tile_size_in_px,obstacles.obstacles);
         if (!inGame) {
             timer.stop();
+            checkPlacement("scores.txt",true);
+        }
+    }
+
+    public void checkPlacement(String filepath, boolean want_to_enter_name){
+        try{
+            int own_score = snake.size();
+            BufferedReader reader = new BufferedReader(new FileReader(filepath));
+            String line = reader.readLine();
+            for(int i=0;i<5;i++,line = reader.readLine()){
+            if(own_score>=Integer.parseInt(line.split(" ")[1])){
+                String name;
+                if(want_to_enter_name){
+                    name = JOptionPane.showInputDialog("Enter your name");
+                }
+                else{
+                    name = "unknown";
+                }
+                names[i] = name;
+                highscores[i] = own_score;
+                own_score = -1;
+            }
+            else{
+                names[i] = line.split(" ")[0];
+                highscores[i] = Integer.parseInt(line.split(" ")[1]);
+            }
+            }
+            reader.close();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+            for(int i=0;i<5;i++){
+                writer.write(names[i] + " " + highscores[i] + "\n");
+            }
+            writer.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,5 @@
+i 103
+dont 20
+like 10
+java 8
+swing 6

@@ -18,4 +18,14 @@ public class BoardTest {
         board.placeNewApple(AppleType.golden);
         assertEquals(board.growthAmountForAppleType(),3);
     }
+
+    @Test
+    public void testCheckPosition(){
+        Board board = new Board();
+        for(int i=0;i<100;i++){
+            board.snake.parts.add(new Coordinate(i,i));
+        }
+        board.checkPlacement("testscores.txt",false);
+        assertEquals(board.highscores[0],103);
+    }
 }
