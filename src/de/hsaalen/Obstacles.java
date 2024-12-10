@@ -24,6 +24,7 @@ public class Obstacles{
             }
             valid_location_found = isObstacleValid(obstacle,snake_parts,apple_coordinate,board_width_in_tiles,board_height_in_tiles);
         }
+        if(valid_location_found) obstacles.addAll(obstacle);
     }
 
     public boolean isObstacleValid(ArrayList<Coordinate> obstacle,ArrayList<Coordinate> snake_parts, Coordinate apple_coordinate, int board_width_in_tiles, int board_height_in_tiles){

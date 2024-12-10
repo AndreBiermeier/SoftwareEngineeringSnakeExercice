@@ -28,4 +28,14 @@ public class ObstaclesTest{
         new_obstacle.get(0).x=21;
         assertFalse(obstacles.isObstacleValid(new_obstacle,snake.parts,apple_coordinate,30,30));
     }
+
+    @Test
+    public void testGenerateIShapedObstacle(){
+        Obstacles obstacles = new Obstacles();
+        assertEquals(obstacles.obstacles.size(), 0);
+        Snake snake = new Snake();
+        obstacles.generateIShapedObstacle(Direction.up, snake.parts, new Coordinate(0,0),30,30);
+        assertEquals(obstacles.obstacles.size(), 3);
+
+    }
 }
