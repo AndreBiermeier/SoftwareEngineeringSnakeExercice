@@ -33,6 +33,7 @@ public class Board extends JPanel implements ActionListener {
     private Image normal_apple_img;
     private Image golden_apple_img;
     private Image head_img;
+    private Image fire_img;
 
     public Board(){
         initBoard();
@@ -60,6 +61,9 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon image_icon_golden_apple = new ImageIcon("src/resources/goldenapple.png");
         golden_apple_img = image_icon_golden_apple.getImage();
+
+        ImageIcon image_icon_fire = new ImageIcon("src/resources/fire.png");
+        fire_img = image_icon_fire.getImage();
     }
 
     private void initGame(){
@@ -94,6 +98,10 @@ public class Board extends JPanel implements ActionListener {
                 default -> random_apple_image = normal_apple_img;
             }
             g.drawImage(random_apple_image, apple.coordinate.x*tile_size_in_px, apple.coordinate.y*tile_size_in_px, this);
+
+            for(Coordinate obstacle_tile : obstacles.obstacles){
+                g.drawImage(fire_img, obstacle_tile.x*tile_size_in_px, obstacle_tile.y*tile_size_in_px, this);
+            }
 
             for (int z = 0; z < snake.size(); z++) {
                 if (z == 0) {
@@ -133,9 +141,15 @@ public class Board extends JPanel implements ActionListener {
     public int growthAmountForAppleType(){
         switch(apple.type){
             case normal -> {return 1;}
-            case golden -> {return 3;}
+            case golden -> {
+                obstacles.generateIShapedObstacle(randomDirection(),snake.parts,apple.coordinate,width_in_px/tile_size_in_px,height_in_px/tile_size_in_px);
+                return 3;}
             default -> {return 0;}
         }
+    }
+
+    public Direction randomDirection(){
+        return Math.random()>0.5 ? (Math.random()>0.5 ? Direction.up : Direction.down) : Math.random()>0.5 ? Direction.left : Direction.right;
     }
 
     private void move(){
